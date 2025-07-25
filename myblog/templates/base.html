@@ -1,0 +1,45 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мой блог{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+    <body>
+        <div class="page">
+        <header>
+            <nav>
+                <a href="{{ url_for('main.home') }}">Главная</a>
+                <a href="{{ url_for('main.post_list') }}">Посты</a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.create_post') }}">Написать пост</a>
+                    <a href="{{ url_for('main.logout') }}">Выход ({{ current_user.username }})</a>
+                {% else %}
+                    <a href="{{ url_for('main.login') }}">Вход</a>
+                    <a href="{{ url_for('main.register') }}">Регистрация</a>
+                {% endif %}
+            </nav>
+        </header>
+
+        <main class="container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Мой блог. Все права защищены.</p>
+        </footer>
+</div>
+</body>
+</html>

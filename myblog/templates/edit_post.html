@@ -1,0 +1,20 @@
+<!-- templates/edit_post.html -->
+{% extends "base.html" %}
+
+{% block title %}Редактировать пост{% endblock %}
+
+{% block content %}
+<h2>Редактировать пост</h2>
+<form method="POST">
+    <p>
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" value="{{ post.title }}" required>
+    </p>
+    <p>
+        <label for="content">Текст:</label>
+        <textarea id="content" name="content" rows="10" required>{{ post.content }}</textarea>
+    </p>
+    <button type="submit">Сохранить</button>
+    <a href="{{ url_for('main.post_detail', post_id=post.id) }}">Отмена</a>
+</form>
+{% endblock %}

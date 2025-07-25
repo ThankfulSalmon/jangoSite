@@ -1,0 +1,17 @@
+<!-- templates/post_list.html -->
+{% extends "base.html" %}
+
+{% block title %}Блог{% endblock %}
+
+{% block content %}
+<h2>Все записи</h2>
+<a href="{{ url_for('main.create_post') }}">Написать пост</a>
+<hr>
+{% for post in posts %}
+    <div class="post">
+        <h3><a href="{{ url_for('main.post_detail', post_id=post.id) }}">{{ post.title }}</a></h3>
+        <p class="meta">Автор: {{ post.author.username }} | {{ post.created_at.strftime('%d.%m.%Y') }}</p>
+        <p>{{ post.content[:150] }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

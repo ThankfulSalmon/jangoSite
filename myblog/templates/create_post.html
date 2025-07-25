@@ -1,0 +1,19 @@
+<!-- templates/create_post.html -->
+{% extends "base.html" %}
+
+{% block title %}Новый пост{% endblock %}
+
+{% block content %}
+<h2>Написать пост</h2>
+<form method="POST">
+    <p>
+        <label for="title">Заголовок:</label>
+        <input type="text" id="title" name="title" required>
+    </p>
+    <p>
+        <label for="content">Текст:</label>
+        <textarea id="content" name="content" rows="10" required></textarea>
+    </p>
+    <button type="submit">Опубликовать</button>
+</form>
+{% endblock %}

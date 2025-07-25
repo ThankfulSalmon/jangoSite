@@ -1,0 +1,26 @@
+<!-- templates/post_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<article>
+    <h2>{{ post.title }}</h2>
+    <p class="meta">Автор: {{ post.author.username }} | {{ post.created_at.strftime('%d.%m.%Y') }}</p>
+    <div class="content">
+        {{ post.content.replace('\n', '<br>') | safe }}
+    </div>
+
+    <!-- Кнопки для автора -->
+    {% if current_user.is_authenticated and post.author == current_user %}
+        <p>
+            <a href="{{ url_for('main.edit_post', post_id=post.id) }}" class="btn">Редактировать</a>
+
+            <!-- Форма удаления (POST) -->
+            <form method="POST" action="{{ url_for('main.delete_post', post_id=post.id) }}" style="display:inline;">
+                <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить пост?')">Удалить</button>
+            </form>
+        </p>
+    {% endif %}
+</article>
+{% endblock %}

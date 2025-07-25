@@ -1,0 +1,12 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Добро пожаловать на мой сайт!</h2>
+<p>Меня зовут Павел, я магистрант РЭУ имени Г.В.Плехвнова. Здесь я делюсь своими мыслями и проектами.</p>
+
+<!-- Кнопка только для авторизованных -->
+{% if current_user.is_authenticated %}
+    <p><a href="{{ url_for('main.create_post') }}" class="btn">Написать пост</a></p>
+{% endif %}
+{% endblock %}
